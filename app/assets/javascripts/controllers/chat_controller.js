@@ -24,6 +24,13 @@ var ChatController = new function(){
       send_message.addEventListener('click', function(){
         if(message.value)
           Router.app.emit("chat#message", {message: message.value})
+        message.value = ''
+      })
+      message.addEventListener('keydown', function(e){
+        if(e.keyCode == 13 && message.value){
+          Router.app.emit("chat#message", {message: message.value})
+          message.value = ''
+        }
       })
     })
   }
