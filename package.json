@@ -1,0 +1,7 @@
+{
+  "name": "simple-chat",
+  "private": true,
+  "dependencies": {
+    "north": ">=0.1.3"
+  }
+}
