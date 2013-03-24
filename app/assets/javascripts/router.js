@@ -4,7 +4,7 @@ var Router = new function(){
     example  { ChatController: Chat,
                ArticleController: Article }
   */
-  this.controllers = {}
+  this.controllers = {ChatController: ChatController}
 
   this.processMessage = function(msg){
     if(msg.emitter){

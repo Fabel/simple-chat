@@ -1,0 +1,7 @@
+<ul id="message_list">
+  <% messages.forEach(function(message){ %>
+    <li><%= message.user %>: <%= message.message %></li>
+  <% }) %>
+</ul>
+<input type="text" id="message">
+<input type="submit" id="send_message">
