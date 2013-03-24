@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>404</title>
+  <style type="text/css">
+    *{
+      margin: 0;
+    }
+    html {
+      height: 100%;
+      width: 100%;
+    }
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+
+    .term_app{
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background-color: black;
+    }
+    .text{
+      position: fixed;
+      left: 50px;
+      top: 50px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #00ff00;
+      font-family: tahoma;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript">
+    ;(function(){
+      var b = document.body
+      b.innerHTML = ""
+      var div = document.createElement('div')
+      div.className = "term_app"
+      var span = document.createElement('span')
+      span.className = "text"
+      div.appendChild(span)
+      b.appendChild(div)
+
+      var char = 0
+      var text = "The Matrix has you...111113 404 page error 111113 The page you were looking for doesn't exist."
+      var appendChar = function(){
+        if(text.charAt(char) == '3'){
+          setTimeout(appendChar, 1000)
+          char++
+          return
+        }
+
+        if(text.charAt(char) == '1')
+          span.innerHTML+= '<br>'
+        else
+          span.innerHTML+= text.charAt(char)
+        char++
+        if(char < text.length)
+          setTimeout(appendChar, 40)
+      }
+      setTimeout(appendChar, 40)
+    })()
+  </script>
+</body>
+</html>
