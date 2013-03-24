@@ -1,5 +1,14 @@
-<div id="login_form">
-  User name: <br/>
-  <input type="text" id="user_name">
-  <input type="submit" id="login">
+Users online: <br/>
+<ul id="user_list">
+  <% users.forEach(function(user){ %>
+    <li><%= user %></li>
+  <% }) %>
+</ul>
+
+<div id="content">
+  <div id="login_form">
+    Your name: <br/>
+    <input type="text" id="user_name">
+    <input type="submit" id="login">
+  </div>
 </div>

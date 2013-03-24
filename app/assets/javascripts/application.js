@@ -16,7 +16,7 @@ var Application = function(){
 
   this.run = function(){
     //logic for your application
-    ChatController.Index()
+    this.emit('chat#index')
     return this
   }
 }
