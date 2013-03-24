@@ -4,7 +4,9 @@
 
 `
 npm install
+
 or
+
 npm -g install north
 `
 

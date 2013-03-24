@@ -6,6 +6,9 @@ var ChatController = new function(){
   this.Index = function(msg){
     EJS.renderTemplate('chat#index', {users: msg.data} , function(data){
       document.body.innerHTML = data
+      msg.data.forEach(function(user){
+        Chat.NewUser({data: {user: user}})
+      })
       login.addEventListener('click', function(){
         if(user_name.value)
           Router.app.emit('chat#login', {user: user_name.value})
