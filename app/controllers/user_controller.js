@@ -1,5 +1,4 @@
 exports.UserController = new function(){
-  //actions
   this.Registation = function(client, params){
     if(params.user){
       var user = User.new(params.user)
