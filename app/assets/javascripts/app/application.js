@@ -15,8 +15,9 @@ var Application = function(){
   }
 
   this.run = function(){
-    //logic for your application
-    this.emit('chat#index')
+    EJS.renderTemplate('layout#index', function(data){
+      document.body.innerHTML = data
+    })
     return this
   }
 }

@@ -1,11 +1,5 @@
 var Router = new function(){
 
-  /*controller objects
-    example  { ChatController: Chat,
-               ArticleController: Article }
-  */
-  this.controllers = {ChatController: ChatController}
-
   this.processMessage = function(msg){
     if(msg.emitter){
       this.processController(msg)
@@ -15,7 +9,7 @@ var Router = new function(){
   }
 
   this.findController = function(name){
-    return this.controllers[name+'Controller']
+    return controllers[name+'Controller']
   }
 
   this.processController = function(msg){
