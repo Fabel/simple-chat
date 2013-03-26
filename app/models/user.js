@@ -65,6 +65,19 @@ User.loginByToken = function(token){
   return null
 }
 
+User.receivePhoto = function(data){
+  fs.unlinkSync(APP_PATH+'/public'+this.user.file)
+  this.user.file = FileReceiver(this.lastFileName, data, 'images/'+this.user.name)
+  this.user.save()
+  this.send({emitter:{
+    controller: 'User',
+    action: 'LoadPhoto'
+  }, data:{
+    success: true,
+    user: this.user
+  }})
+}
+
 User.loadAllUsers = function(){
   var users = fs.readdirSync(usersPath)
   users.forEach(function(user, id){
@@ -159,18 +172,6 @@ User.prototype = new function(){
       return callback.call(this)
     else
       return this.forClient()
-  }
-
-  this.receivePhoto = function(data){
-    this.user.file = FileReceiver(this.lastFileName, data, 'images/'+this.user.name)
-    this.user.save()
-    this.send({emitter:{
-      controller: 'User',
-      action: 'LoadPhoto'
-    }, data:{
-      success: true,
-      user: this.user
-    }})
   }
 }
 global.User = User

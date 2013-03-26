@@ -49,7 +49,7 @@ exports.UserController = new function(){
   this.LoadPhoto = function(client, params){
     if(params.file){
       client.lastFileName = params.file
-      client.onBinaryData = client.user.receivePhoto
+      client.onBinaryData = User.receivePhoto
     }
     this.send(client, params)
   }
