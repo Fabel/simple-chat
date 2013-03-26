@@ -10,6 +10,10 @@ var Application = function(){
     socket.sendJSON({emitter: emitter, params: data})
   }
 
+  this.local = function(emitter, data){
+    Router.local(emitter, data)
+  }
+
   this.send = function(data){
     return socket.send(data)
   }

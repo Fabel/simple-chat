@@ -9,7 +9,10 @@ var UserController = new function(){
   }
   this.Registration = function(msg){
     if(msg.data.errors){
-
+      msg.data.errors.forEach(function(error){
+        pushError(error)
+      })
+      return
     }
     EJS.renderTemplate('user#registration', {user: msg.data.user}, function(html){
       content.innerHTML = html

@@ -5,14 +5,14 @@
         <span class="label"><%= user.name %></span>
       </li>
       <li class="last">
-        <a href="#" data-action="user#logout">Sign out</a>
+        <a href="#" data-emit="user#logout">Sign out</a>
       </li>
     <% }else{ %>
       <li class="first active">
-        <a href="#" data-action="user#login">Sign in</a>
+        <a href="#" data-local="user#login">Sign in</a>
       </li>
       <li class="last">
-        <a href="#" data-action="user#registration">Sign up</a>
+        <a href="#" data-local="user#registration">Sign up</a>
       </li>
     <% } %>
   </ul>

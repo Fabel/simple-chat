@@ -52,15 +52,18 @@ var initLayout = function(){
 
 var linkProcessor = function(event){
   event.preventDefault()
-  var action = this.getAttribute('data-action')
+
   var data = this.getAttribute('data-data') || {}
-  if(action)
+  var action
+  if(action = this.getAttribute('data-emit')){
     Router.app.emit(action, data)
+  }else if(action = this.getAttribute('data-local'))
+    Router.local(action, data)
 }
 
 $(function(){
   document.body.addEventListener('click', function(e){
-    if(e.target.getAttribute('data-action')){
+    if(e.target.getAttribute('data-emit') || e.target.getAttribute('data-local')){
       if(!e.target.onclick){
         e.target.onclick = linkProcessor
         e.target.click()

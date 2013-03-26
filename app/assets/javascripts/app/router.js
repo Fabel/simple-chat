@@ -1,7 +1,19 @@
 var Router = new function(){
 
+  var parseEmitter = function(emitter){
+    if(typeof emitter == 'string'){
+      var names = emitter.split('#')
+      return {controller: Camelize(names[0]), action: Camelize(names[1])}
+    }
+    return emitter
+  }
+
+  this.local = function(emitter, data){
+    emitter = parseEmitter(emitter)
+    this.processController({emitter: emitter, data: data})
+  }
+
   this.processMessage = function(msg){
-    console.log(msg)
     if(msg.emitter){
       this.processController(msg)
     }
