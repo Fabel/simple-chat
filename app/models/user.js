@@ -26,7 +26,8 @@ Users.online = function(){
 
 Users.add = function(user){
   this[user.name] = user
-  user.save()
+  user.login()
+  return user
 }
 
 var User = function(attrs){
@@ -122,6 +123,13 @@ User.prototype = new function(){
     this.save()
   }
 
+  this.avatar = function(){
+    if(this.file)
+      return this.file
+    else
+      return "/assets/default.jpg"
+  }
+
   this.checkPassword = function(pass){
     return this.encrypted_password == cryptPassword(pass)
   }
@@ -133,7 +141,7 @@ User.prototype = new function(){
   this.forClient = function(){
     return {
       name: this.name,
-      file: this.file
+      file: this.avatar()
     }
   }
 

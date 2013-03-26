@@ -20,7 +20,7 @@ var Router = new function(){
     if(action)
       action(msg, this.app)
     else
-      consoel.log('In '+controller+' missing action '+ action)
+      console.log('In '+controller+' missing action '+ action)
   }
 }
 
