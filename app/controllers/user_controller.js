@@ -14,13 +14,19 @@ exports.UserController = new function(){
   }
 
   this.Login = function(client, params){
-    var user
-    if(user = User.login(params.user.name, params.user.password)){
-      params.success = true
-      params.user = user
-      client.onBinaryData = user.receivePhoto
-    }else{
-      params.fail = "error"
+    if(params.user){
+      var user
+      if(user = User.login(params.user.login, params.user.password)){
+        client.user = user
+        params = {
+          success: true,
+          user: user,
+          token: user.token
+        }
+        client.onBinaryData = user.receivePhoto
+      }else{
+        params.fail = "error"
+      }
     }
     this.send(client, params)
   }
@@ -29,15 +35,20 @@ exports.UserController = new function(){
     client.lastFileName = params.file
   }
 
-  this.loginByToken = function(client, params){
+  this.LoginByToken = function(client, params){
     var user
-    if(user = User.loginByToken(params.user.name, params.user.token)){
+    if(user = User.loginByToken(params.token)){
+      params = {}
+      client.user = user
       params.success = true
       params.user = user
       client.onBinaryData = user.receivePhoto
-    }else{
-      params.fail = "error"
     }
+    this.send(client, params)
+  }
+
+  this.Logout = function(client, params){
+    client.user.logout()
     this.send(client, params)
   }
 }

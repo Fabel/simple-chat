@@ -15,9 +15,7 @@ var Application = function(){
   }
 
   this.run = function(){
-    EJS.renderTemplate('layout#index', function(data){
-      document.body.innerHTML = data
-    })
+    initLayout()
     return this
   }
 }

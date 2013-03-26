@@ -264,6 +264,12 @@ ul {
 	text-shadow: 0 2px 1px #3F1C1C;
 }
 
+#nav .label{
+	text-decoration: none;
+	color: #ffffff;
+	text-shadow: 0 2px 1px #3F1C1C;
+}
+
 #nav li {
 	margin: 0 1em 0 1em;
 }
@@ -282,8 +288,17 @@ ul {
 	margin: 0 auto 0 auto;
 }
 
+label{
+	width: 150px;
+	display: inline-block;
+}
+
+#login_form label{
+	width: 150px;
+}
+
 input.button {
-	margin-left: 1em;
+	margin-left: 2px;
 	border: 0;
 	color: #ffffff;
 	background: #6f2f2f;
@@ -292,5 +307,10 @@ input.button {
 
 input.input_text {
 	border: solid 1px #ffffff;
-	padding: 8px;
+	margin: 0 2px;
+	padding: 5px;
+}
+
+.row{
+	margin-bottom: 5px;
 }

@@ -13,6 +13,8 @@ var usersPath = APP_PATH + '/public/assets/users/'
 
 global.Users = {}
 
+var userTokens = {}
+
 Users.online = function(){
   var users = []
   for(var name in this){
@@ -52,8 +54,9 @@ User.login = function(name, password){
   return null
 }
 
-User.loginByToken = function(name, token){
-  if(Users[name]){
+User.loginByToken = function(token){
+  var name
+  if(name = userTokens[token]){
     if(Users[name].checkToken(token)){
       return Users[name].login()
     }
@@ -65,6 +68,8 @@ User.loadAllUsers = function(){
   var users = fs.readdirSync(usersPath)
   users.forEach(function(user, id){
     Users[user] = User.load(user)
+    if(Users[user].token)
+      userTokens[Users[user].token] = user
   })
   console.log(users.length + " users loaded.")
 }
@@ -103,6 +108,7 @@ User.prototype = new function(){
   this.login = function(){
     if(!this.token){
       this.token = Utils.generateToken()
+      userTokens[this.token] = this.name
       this.save()
     }
     this.status = true
@@ -111,6 +117,7 @@ User.prototype = new function(){
 
   this.logout = function(){
     this.status = false
+    delete userTokens[this.token]
     this.token = null
     this.save()
   }
@@ -126,7 +133,6 @@ User.prototype = new function(){
   this.forClient = function(){
     return {
       name: this.name,
-      encrypted_password: this.encrypted_password,
       file: this.file
     }
   }

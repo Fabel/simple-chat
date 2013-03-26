@@ -1,7 +1,9 @@
 <body>
   <div id="bg_shadow">
     <div id="outer" class="bg">
-      <%= render({partial: 'header'}) %>
+      <div id="header">
+        <%= render({partial: 'header', locals:{ user: null }}) %>
+      </div>
       <div id="main">
         <div id="content">
           <div class="post">

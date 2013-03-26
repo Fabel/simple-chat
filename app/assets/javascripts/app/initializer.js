@@ -34,3 +34,44 @@ EJS.Storage.load = function(emitter){
   })
   xhr.send(null)
 }
+
+
+var layoutCallbacks = []
+
+var $ = function(callack){
+  layoutCallbacks.push(callack)
+}
+
+var initLayout = function(){
+  EJS.renderTemplate("layout#index", function(data){
+    document.body.innerHTML = data
+    for(var i = 0; i<layoutCallbacks.length; i++)
+      layoutCallbacks[i].call(window)
+  })
+}
+
+var linkProcessor = function(event){
+  event.preventDefault()
+
+  var action = this.getAttribute('data-action')
+  var data = this.getAttribute('data-data') || {}
+  if(action)
+    Router.app.emit(action, data)
+}
+
+$(function(){
+  document.body.addEventListener('click', function(e){
+    if(e.target.getAttribute('data-action')){
+      if(!e.target.onclick){
+        e.target.onclick = linkProcessor
+        e.target.click()
+      }
+    }
+  })
+})
+
+$(function(){
+  var token
+  if(token = localStorage.getItem('user_token'))
+    Router.app.emit('user#login_by_token', {token: token})
+})

@@ -1,0 +1,20 @@
+<div id="nav">
+  <ul>
+    <% if(user){ %>
+      <li class="first avatar">
+        <span class="label"><%= user.name %></span>
+      </li>
+      <li class="last">
+        <a href="#" data-action="user#logout">Sign out</a>
+      </li>
+    <% }else{ %>
+      <li class="first active">
+        <a href="#" data-action="user#login">Sign in</a>
+      </li>
+      <li class="last">
+        <a href="#">Sign up</a>
+      </li>
+    <% } %>
+  </ul>
+  <br class="clear" />
+</div>

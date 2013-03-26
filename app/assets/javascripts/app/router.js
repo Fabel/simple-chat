@@ -1,6 +1,7 @@
 var Router = new function(){
 
   this.processMessage = function(msg){
+    console.log(msg)
     if(msg.emitter){
       this.processController(msg)
     }
@@ -18,6 +19,8 @@ var Router = new function(){
     var action = controller[emitter.action]
     if(action)
       action(msg, this.app)
+    else
+      consoel.log('In '+controller+' missing action '+ action)
   }
 }
 
