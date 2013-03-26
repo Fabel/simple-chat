@@ -24,12 +24,9 @@ var Camelize = function(str){
 }
 
 Array.prototype.remove = function(){
-  for(var i=this.length;i--;){
-    for(var j=arguments.length;j--;)
-      if(this[i] === arguments[j]){
-        this.splice(i, 1)
-        break;
-      }
-  }
+  var x
+  for(var i=arguments.length;i--;)
+    while((x = this.indexOf(arguments[i])) != -1)
+      this.splice(x, 1)
   return this
 }
