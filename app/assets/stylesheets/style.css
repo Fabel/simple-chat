@@ -92,6 +92,9 @@ ul {
   margin-left: 20px;
   padding: 5px;
 }
+#social_box .ava {
+	border-radius: 12px;
+}
 
 #social_box img:hover {
   background-color: rgba(96, 96, 96, 1);
