@@ -9,7 +9,7 @@ var cryptPassword = function(pass){
   return shasum.digest('hex')
 }
 
-var usersPath = APP_PATH + '/public/assets/users/'
+var usersPath = APP_PATH + '/db/users/'
 
 global.Users = {}
 
