@@ -39,7 +39,6 @@ exports.UserController = new function(){
           user: user,
           token: user.token
         }
-        client.onBinaryData = user.receivePhoto
       }else{
         params.fail = "error"
       }
@@ -48,7 +47,11 @@ exports.UserController = new function(){
   }
 
   this.LoadPhoto = function(client, params){
-    client.lastFileName = params.file
+    if(params.file){
+      client.lastFileName = params.file
+      client.onBinaryData = client.user.receivePhoto
+    }
+    this.send(client, params)
   }
 
   this.LoginByToken = function(client, params){
@@ -58,7 +61,6 @@ exports.UserController = new function(){
       client.user = user
       params.success = true
       params.user = user
-      client.onBinaryData = user.receivePhoto
     }
     this.send(client, params)
   }

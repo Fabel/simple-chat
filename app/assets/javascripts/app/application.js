@@ -10,6 +10,10 @@ var Application = function(){
     socket.sendJSON({emitter: emitter, params: data})
   }
 
+  this.send = function(data){
+    return socket.send(data)
+  }
+
   this.checkConnection = function(){
     return socket.checkConnection()
   }

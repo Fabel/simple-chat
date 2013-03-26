@@ -52,7 +52,6 @@ var initLayout = function(){
 
 var linkProcessor = function(event){
   event.preventDefault()
-
   var action = this.getAttribute('data-action')
   var data = this.getAttribute('data-data') || {}
   if(action)

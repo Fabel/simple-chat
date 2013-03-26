@@ -1,13 +1,13 @@
 var UserController = new function(){
   //actions
+  var pushError = function(error){
+    var errorsCont = content.querySelector('#errors')
+    var li = document.createElement('li')
+    li.appendChild(document.createTextNode(error))
+    errorsCont.appendChild(li)
+    fadeOut(li, 3000)
+  }
   this.Registration = function(msg){
-    var pushError = function(error){
-      var errorsCont = content.querySelector('#errors')
-      var li = document.createElement('li')
-      li.appendChild(document.createTextNode(error))
-      errorsCont.appendChild(li)
-      fadeOut(li, 3000)
-    }
     if(msg.data.errors){
 
     }
@@ -39,7 +39,7 @@ var UserController = new function(){
     if(msg.data.success){
       localStorage.setItem('user_token', msg.data.token)
       success(msg.data)
-      content.innerHTML = "success"
+      content.innerHTML = "<h2>Login successful</h2>"
       return
     }
     EJS.renderTemplate('user#login', function(html){
@@ -70,8 +70,53 @@ var UserController = new function(){
     })
   }
 
+  var loadFile = function(file){
+    var fr = new FileReader
+    fr.addEventListener('load', function(e){
+      Router.app.send(this.result)
+    })
+    fr.readAsArrayBuffer(file)
+  }
+
+  var previewPhoto = function(file){
+    var fr = new FileReader
+    fr.addEventListener('load', function(e){
+      var img = document.createElement('img')
+      img.src = this.result
+      if(preview.firstChild)
+        preview.removeChild(preview.firstChild)
+      preview.appendChild(img)
+    })
+    fr.readAsDataURL(file)
+  }
+
   this.LoadPhoto = function(msg){
-    //LoadPhoto body
+    if(msg.data.success){
+      success(msg.data)
+      content.innerHTML = "<h2>Avatar changed</h2>"
+      return
+    }
+    EJS.renderTemplate("user#load_photo", function(html){
+      content.innerHTML = html
+      var file
+      file_field.addEventListener('change', function(){
+        file = this.files[0]
+        if(!file.type.match('jpeg|jpg|png')){
+          pushError("It's not image")
+          return
+        }
+        if(file.size > 2*1024*1024){
+          pushError("Image size > 2Mb")
+          return
+        }
+        previewPhoto(file)
+      })
+
+      submit_photo.addEventListener('click', function(){
+        Router.app.emit("user#load_photo", {file: file.name})
+        loadFile(file)
+      })
+    })
   }
 
   this.Logout = function(msg){

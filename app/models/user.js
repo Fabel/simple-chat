@@ -161,9 +161,16 @@ User.prototype = new function(){
       return this.forClient()
   }
 
-  this.receivePhoto = function(name, data){
-    this.file = FileReceiver(name, data, 'images/'+this.name)
-    this.save()
+  this.receivePhoto = function(data){
+    this.user.file = FileReceiver(this.lastFileName, data, 'images/'+this.user.name)
+    this.user.save()
+    this.send({emitter:{
+      controller: 'User',
+      action: 'LoadPhoto'
+    }, data:{
+      success: true,
+      user: this.user
+    }})
   }
 }
 global.User = User

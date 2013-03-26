@@ -314,3 +314,8 @@ input.input_text {
 .row{
 	margin-bottom: 5px;
 }
+
+#preview img{
+	width: 200px;
+	height: 200px;
+}
