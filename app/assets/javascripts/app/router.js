@@ -18,6 +18,8 @@ var Router = new function(){
     if(msg.emitter){
       this.processController(msg)
     }
+    if(msg.serverStartedAt)
+      EJS.Storage.checkServerRestartDate(new Date(msg.serverStartedAt))
     if(msg.error)
       errorInApp(msg.error)
   }
