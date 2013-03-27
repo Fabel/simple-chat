@@ -24,12 +24,6 @@ Users.online = function(){
   return users
 }
 
-Users.add = function(user){
-  this[user.name] = user
-  user.login()
-  return user
-}
-
 var User = function(attrs){
   attrs = attrs || {}
   this.name = attrs.name
@@ -37,8 +31,8 @@ var User = function(attrs){
   this.encrypted_password = cryptPassword(attrs.password)
   this.token = null
   this.status = false
+  this.channels = ['#Global']
 }
-
 
 User.load = function(name){
   if(fs.existsSync(usersPath+name))
@@ -90,6 +84,16 @@ User.loadAllUsers = function(){
 
 User.prototype = new function(){
 
+  this.addChannel = function(channel){
+    this.channels.push(channel)
+    this.save()
+  }
+
+  this.removeChannel = function(channel){
+    Utils.remove(this.channels, channel)
+    this.save()
+  }
+
   this.validate = function(){
     var errors = []
     if(!this.name)
@@ -105,6 +109,7 @@ User.prototype = new function(){
     this.file = data.file
     this.encrypted_password = data.encrypted_password
     this.token = data.token
+    this.channels = data.channels
     return this
   }
 
@@ -112,7 +117,8 @@ User.prototype = new function(){
     var data = JSON.stringify({
       file: this.file,
       encrypted_password: this.encrypted_password,
-      token: this.token
+      token: this.token,
+      channels: this.channels
     })
     if(!fs.existsSync(usersPath))
       fs.mkdirSync(usersPath)
@@ -154,7 +160,8 @@ User.prototype = new function(){
   this.forClient = function(){
     return {
       name: this.name,
-      file: this.avatar()
+      file: this.avatar(),
+      channels: this.channels
     }
   }
 

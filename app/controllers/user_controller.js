@@ -3,6 +3,9 @@ exports.UserController = new function(){
     var errors = []
     if(!data.login)
       errors.push("Login cant be blank")
+    var s
+    if(s=data.login.match(/\W/))
+      errors.push("Incorrect symbol in name "+s[0])
     if(Users[data.login])
       errors.push("User "+ data.login + " exist.")
     if(data.password.length < 5)
@@ -23,7 +26,12 @@ exports.UserController = new function(){
         password: params.user.password
       }
       var user = new User(data)
-      client.user = Users.add(user)
+      Users[user.name] = user
+      client.user = user.login()
+      client.onclose(unsubscribeAll)
+      params.success = true
+      params.user = user
+      params.token = user.token
     }
     this.send(client, params)
   }
@@ -37,6 +45,7 @@ exports.UserController = new function(){
         user: user,
         token: user.token
       }
+      client.onclose(unsubscribeAll)
     }else{
       params.fail = "error"
     }
@@ -56,6 +65,7 @@ exports.UserController = new function(){
       client.user = user
       params.success = true
       params.user = user
+      client.onclose(unsubscribeAll)
     }
     this.send(client, params)
   }
@@ -63,5 +73,12 @@ exports.UserController = new function(){
   this.Logout = function(client, params){
     client.user.logout()
     this.send(client, params)
+  }
+
+  var unsubscribeAll = function(){
+    var client = this
+    this.user.channels.forEach(function(channel){
+      ChannelList[channel].unsubscribe(client.user)
+    })
   }
 }
