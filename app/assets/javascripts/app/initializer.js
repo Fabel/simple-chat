@@ -1,4 +1,4 @@
-var ToFileName = function(str){
+var Underscore = function(str){
   if(!str) return str
   var replace = function(str, offset){
     if(offset)
@@ -14,7 +14,7 @@ var path = function(emitter){
   for(var i=0;i<subDir.length;i++)
     subDir[i] = subDir[i].toLowerCase()
   subDir = subDir.join('/')
-  var action = emitter.type ? '_'+ToFileName(emitter.action) : ToFileName(emitter.action)
+  var action = emitter.type ? '_'+Underscore(emitter.action) : Underscore(emitter.action)
   var dirNames = ['/assets', subDir, action]
   return dirNames.join('/')+'.ejs'
 }
@@ -50,7 +50,7 @@ var initLayout = function(){
   })
 }
 
-var linkProcessor = function(event){
+var linkHandler = function(event){
   event.preventDefault()
 
   var data = this.getAttribute('data-data') || {}
@@ -63,10 +63,20 @@ var linkProcessor = function(event){
 
 $(function(){
   document.body.addEventListener('click', function(e){
-    if(e.target.getAttribute('data-emit') || e.target.getAttribute('data-local')){
-      if(!e.target.onclick){
-        e.target.onclick = linkProcessor
-        e.target.click()
+    var links = document.querySelectorAll('[data-emit], [data-local]')
+    for(var i=0;i<links.length;i++){
+      if(!links[i].onclick){
+        links[i].onclick = linkHandler
+        var elem = e.target
+        while(elem != document.body){
+          if(elem == links[i]){
+            links[i].click()
+            break
+          }
+          elem = elem.parentNode
+          if(!elem)
+            break
+        }
       }
     }
   })
@@ -76,4 +86,5 @@ $(function(){
   var token
   if(token = localStorage.getItem('user_token'))
     Router.app.emit('user#login_by_token', {token: token})
+
 })
