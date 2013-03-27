@@ -92,7 +92,7 @@ ul {
   margin-left: 20px;
   padding: 5px;
 }
-#social_box .ava {
+.ava {
 	border-radius: 12px;
 }
 
@@ -108,7 +108,7 @@ ul {
 
 #copyright {
 	text-align: center;
-	padding: 8px 0 80px 0;
+	padding: 8px 0 20px 0;
 	color: #404040;
 	text-shadow: 0 1px 0 #101010;
 }
@@ -194,7 +194,7 @@ ul {
 
 #main {
 	position: relative;
-	padding: 64px 32px 24px 32px;
+	padding: 50px 32px 24px 32px;
 	margin-left: -32px;
 	width: 100%;
 	background: #262626 url('cbg.png') top left repeat-x;
@@ -321,4 +321,74 @@ input.input_text {
 #preview img{
 	width: 200px;
 	height: 200px;
+}
+
+#channel_list{
+	width: 200px;
+	height: 100%;
+	position: fixed;
+	padding: 10px;
+	right: 0;
+	top: 0;
+	overflow-y: auto;
+}
+
+#channel_list .channel {
+	overflow: hidden;
+	word-wrap: normal;
+  white-space: nowrap;
+  height: 50px;
+	padding: 3px;
+}
+
+#channel_list .channel:hover {
+  background-color: rgba(96, 96, 96, 1);
+  border-radius: 8px;
+  color: #111;
+}
+
+
+#channel_list #label{
+	width: 100%;
+	font-weight: bold;
+	color: #eaeaea;
+	text-shadow: 2px 2px 5px #777;
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	text-align: center;
+}
+
+.channel img{
+	padding: 0;
+	width: 48px;
+	height: 48px;
+	box-shadow: 2px 3px 5px #222
+}
+
+.channel .new_messages{
+	position: absolute;
+	font-weight: bold;
+	font-size: 1.5em;
+	text-shadow: 2px 2px 5px #000;
+	color: #aaa;
+	margin-left: 45px;
+	margin-top: -10px;
+}
+
+.channel .last_message{
+	display: block;
+	color: #333;
+	margin-top: -30px;
+	margin-left: 55px;
+}
+
+.channel .name{
+	display: inline-block;
+	font-weight: bold;
+	text-shadow: 2px 2px 5px #333;
+	width: 150px;
+	position: relative;
+	top: -25px;
+	left: 2px;
 }
