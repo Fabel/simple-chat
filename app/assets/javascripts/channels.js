@@ -70,6 +70,7 @@ var ChannelList = (function(){
       if(!this.channels[data.name]){
         this.channelNames.push(data.name)
         this.channels[data.name] = new Channel(data, this)
+        this.update()
       }
     }
 
