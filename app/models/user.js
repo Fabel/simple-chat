@@ -60,7 +60,8 @@ User.loginByToken = function(token){
 }
 
 User.receivePhoto = function(data){
-  fs.unlinkSync(APP_PATH+'/public'+this.user.file)
+  if(this.user.file && fs.existsSync(APP_PATH+'/public'+this.user.file))
+    fs.unlinkSync(APP_PATH+'/public'+this.user.file)
   this.user.file = FileReceiver(this.lastFileName, data, 'images/'+this.user.name)
   this.user.save()
   this.send({emitter:{

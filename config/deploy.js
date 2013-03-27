@@ -14,7 +14,7 @@ module.exports = function(){
     descripttion: 'start server',
     commands: [
       "cd "+this.current,
-      "north server 2>&1 >>"+this.shared+"/log/server.log &"
+      "north server -e production 2>&1 >>"+this.shared+"/log/server.log &"
     ]
   })
 
