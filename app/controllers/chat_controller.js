@@ -1,31 +1,32 @@
 exports.ChatController = new function(){
 
-  this.users = []
-
-  this.messages = []
-
-  this.Index = function(client, params){
-    this.send(client, this.users)
+  this.LoadChannel = function(client, params){
+    var user = client.user
+    if(ChannelList[params.channel])
+      ChannelList[params.channel].subscribe(user)
+    this.send(client, {channel: ChannelList[params.channel]})
   }
 
-  this.Message = function(client, params){
-    var msg = {user: client.user, message: params.message}
-    this.messages.push(msg)
-    this.broadcast(client, msg)
+  this.Subscribe = function(client, params){
+    var user = client.user
+    if(ChannelList[params.channel]){
+      ChannelList[params.channel].subscribe(user)
+      user.addChannel(params.channel)
+    }
+    this.send(client, params)
   }
-  this.Login = function(client, params){
-    var controller = this
-    client.onclose(function(){
-      controller.Logout(client, params)
-    })
 
-    client.user = params.user
-    this.send(client, {messages: this.messages, users: this.users})
-    this.users.push(params.user)
-    this.broadcast(client, {user: params.user}, {action: 'new_user'})
+  this.Unsubscribe = function(client, params){
+    var user = client.user
+    if(ChannelList[params.channel]){
+      ChannelList[params.channel].unsubscribe(user)
+      user.removeChannel(params.channel)
+    }
+    this.send(client, params)
   }
-  this.Logout = function(client, params){
-    Utils.remove(this.users, client.user)
-    this.broadcast(client, client.user, {action: 'logout'})
+
+  this.MakeChannel = function(client, params){
+    if(!ChannelList[params.channel])
+      ChannelList.newChannel(params.channel)
   }
 }

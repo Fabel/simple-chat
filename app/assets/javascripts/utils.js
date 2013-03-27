@@ -1,4 +1,4 @@
-var fadeOut = function(element, time){
+var fadeOut = function(element, time, callback){
   var opacity = 1
   if(element){
     setTimeout(function(){
