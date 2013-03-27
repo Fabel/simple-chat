@@ -1,0 +1,6 @@
+<div class="channel" data-local="chat#channel" data-data="<%= channel.name %>">
+  <span class="new_messages"><% if(channel.new_messages > 0){ _$.p('+'+channel.new_messages) } %></span>
+  <img class="channel_ava ava" src="<%= channel.ava %>"/>
+  <span class="name"><%= channel.name %></span>
+  <span class="last_message"><%= channel.last_message %></span>
+</div>

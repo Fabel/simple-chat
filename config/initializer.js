@@ -1,3 +1,5 @@
 require('north')
 require(APP_PATH+'/app/models/user')
+require(APP_PATH+'/app/models/channel')
 User.loadAllUsers()
+ChannelList.loadAllChannels()

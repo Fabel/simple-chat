@@ -2,13 +2,13 @@
   <div id="bg_shadow">
     <div id="outer" class="bg">
       <div id="header">
-        <%= render({partial: 'header', locals:{ user: null }}) %>
+        <%= render({partial: 'header', locals:{ user: null, channel: null }}) %>
       </div>
       <div id="main">
         <div id="content">
           <div class="post">
             <h2>
-              Welcome to Simple chat
+              Welcome to Not Simple chat
             </h2>
             <img class="left" src="/assets/pic1.jpg" width="150" height="190" alt="" />
             <p>
@@ -26,4 +26,5 @@
       </div>
       <%= render({partial: "footer"}) %>
   </div>
+  <div id="channel_list">
 </body>
