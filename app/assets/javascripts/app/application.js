@@ -39,5 +39,5 @@ document.addEventListener('DOMContentLoaded', function(){
       app.run()
     }
   }
-  setTimeout(checkSocket, 100)
+  setTimeout(checkSocket, 500)
 })
