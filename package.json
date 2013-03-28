@@ -2,6 +2,6 @@
   "name": "simple-chat",
   "private": true,
   "dependencies": {
-    "north": ">=0.1.5"
+    "north": ">=0.1.6"
   }
 }
