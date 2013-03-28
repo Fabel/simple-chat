@@ -46,6 +46,8 @@ var ChannelList = (function(){
     }
 
     this.select = function(){
+      if(this.current)
+        return
       if(CL.currentChannel)
         CL.currentChannel.unselect()
       this.current = true
