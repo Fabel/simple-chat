@@ -1,3 +1,9 @@
 <div class="message">
-  <%= message.user +": "+message.message %>
+  <div id="user">
+    <img class="ava" src="/assets/global_channel.jpg"/>
+    <span class="name"><%= message.user %></span>
+  </div>
+  <div class="message_text">
+    <pre><%= message.message %></pre>
+  </div>
 </div>

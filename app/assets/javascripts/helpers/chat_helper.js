@@ -36,6 +36,33 @@ var ChatHelper = new function(){
     })
   }
 
+  this.channelSelect = function(channel){
+    header.classList.add('chat_header')
+    outer.removeChild(footer)
+    header.removeChild(social_box)
+    content.innerHTML = ''
+    channel.switchMenu()
+    content.appendChild(channel.chat)
+    channel.message_list.scrollTop = channel.message_list.scrollHeight
+  }
+
+  this.bindEventsForChat = function(channel){
+    var submitBtn = channel.chat.querySelector('#send_message')
+    var textArea = channel.chat.querySelector('textarea')
+
+    submitBtn.addEventListener('click', function(){
+      channel.pushMessage(Router.app.currentUser.name, textArea.value.replace(/\n/g, '<br>'))
+      textArea.value = ''
+      message_list.scrollTop = message_list.scrollHeight
+    })
+
+    textArea.addEventListener('keydown', function(e){
+      if(!e.shiftKey && e.keyCode == 13){
+        e.preventDefault()
+        submitBtn.click()
+      }
+    })
+  }
 }
 // document.body.addEventListener('mousemove', function(e){
 //   if(e.pageY< 50)

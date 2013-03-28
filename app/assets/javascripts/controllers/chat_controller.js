@@ -9,7 +9,6 @@ var ChatController = new function(){
   }
 
   this.Channel = function(msg){
-    console.log(CL.channels[msg.data])
     CL.channels[msg.data].select()
   }
 

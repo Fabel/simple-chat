@@ -41,6 +41,7 @@ var ChannelList = (function(){
         var c = div.firstChild
         self.chat = c
         self.message_list = c.querySelector('#message_list')
+        ChatHelper.bindEventsForChat(self)
       })
     }
 
@@ -51,12 +52,8 @@ var ChannelList = (function(){
       CL.currentChannel = this
       this.new_messages = 0
       this.update()
-      outer.classList.add('chat')
-      header.classList.add('chat_header')
-      content.innerHTML = ''
 
-      this.switchMenu()
-      content.appendChild(this.chat)
+      ChatHelper.channelSelect(this)
     }
 
     this.appendMessage = function(msg){
@@ -66,6 +63,7 @@ var ChannelList = (function(){
         div.innerHTML = html
         var c = div.firstChild
         self.message_list.appendChild(c)
+        self.message_list.scrollTop = self.message_list.scrollHeight
       })
     }
 
