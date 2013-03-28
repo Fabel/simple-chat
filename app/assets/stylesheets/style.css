@@ -392,3 +392,11 @@ input.input_text {
 	top: -25px;
 	left: 2px;
 }
+
+.chat{
+	top: -110px;
+}
+
+.chat_header{
+	padding: 2px 32px !important;
+}
