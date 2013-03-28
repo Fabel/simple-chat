@@ -1,5 +1,5 @@
 var Socket = function(){
-  this.connection = new WebSocket('ws://'+location.host)
+  this.connection = new WebSocket('ws://'+location.hostname+':8081')
   this.init(this)
 }
 
