@@ -38,7 +38,8 @@ var ChatHelper = new function(){
 
   this.channelSelect = function(channel){
     header.classList.add('chat_header')
-    outer.removeChild(footer)
+    if(window,footer)
+      outer.removeChild(footer)
     header.removeChild(social_box)
     content.innerHTML = ''
     channel.switchMenu()
