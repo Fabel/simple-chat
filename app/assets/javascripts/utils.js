@@ -30,3 +30,5 @@ Array.prototype.remove = function(){
       this.splice(x, 1)
   return this
 }
+
+var J = function(d){ return JSON.stringify(d) }

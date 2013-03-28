@@ -75,6 +75,7 @@ var UserHelper = new function(){
 
   this.success = function(data){
     var user = data.user
+    Router.app.currentUser = user
     EJS.renderPartial("layout#header", {user: data.user}, function(html){
       header.innerHTML = html
     })

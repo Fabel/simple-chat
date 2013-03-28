@@ -58,7 +58,7 @@ var linkHandler = function(event){
   var data = this.getAttribute('data-data') || {}
   var action
   if(action = this.getAttribute('data-emit')){
-    Router.app.emit(action, data)
+    Router.app.emit(action, {data: data})
   }else if(action = this.getAttribute('data-local'))
     Router.local(action, data)
 }
@@ -67,8 +67,9 @@ $(function(){
   document.body.addEventListener('click', function(e){
     var links = document.querySelectorAll('[data-emit], [data-local]')
     for(var i=0;i<links.length;i++){
-      if(!links[i].onclick){
-        links[i].onclick = linkHandler
+      if(!links[i].link_handler){
+        links[i].addEventListener('click', linkHandler)
+        links[i].link_handler = true
         var elem = e.target
         while(elem != document.body){
           if(elem == links[i]){

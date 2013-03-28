@@ -3,7 +3,7 @@
     <a href="#" onclick="initLayout()">Not Simple Chat</a>
   </h1>
 </div>
-<%= render({partial: 'navigate', locals: {user: user}}) %>
+<%= render({partial: 'navigate', locals: {user: user, channel: null}}) %>
 <div id="social_box">
   <%= render({partial: 'avatar', locals: {user: user}}) %>
   <a href="http://www.facebook.com/nodenorth" target="_blank"><img src="assets/facebook.png" alt="facebook" /></a>

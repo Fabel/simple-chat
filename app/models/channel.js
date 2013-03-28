@@ -81,5 +81,15 @@ ChannelList.newChannel = function(name){
   ChannelList[name] = new Channel(name)
 }
 
+ChannelList.withoutUser = function(user){
+  var channels = []
+  for(var name in ChannelList){
+    if(typeof ChannelList[name] == 'object')
+      if(Utils.exclude(user.channels, name))
+        channels.push(name)
+  }
+  return channels
+}
+
 global.Channel = Channel
 global.ChannelList = ChannelList

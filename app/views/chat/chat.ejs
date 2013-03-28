@@ -1,0 +1,10 @@
+<div id="chat" data-channel="<%= channel.name %>">
+  <div id="message_list">
+    <% messages.forEach(function(message){ %>
+      <%= render({partial: 'message', locals: {message: message}}) %>
+    <% }) %>
+  </div>
+  <div id="message_input">
+    <textarea class="message"></textarea>
+  </div>
+</div>

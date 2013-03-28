@@ -1,5 +1,10 @@
 exports.ChatController = new function(){
 
+  this.Join = function(client, params){
+    params.channels = ChannelList.withoutUser(client.user)
+    this.send(client, params)
+  }
+
   this.LoadChannel = function(client, params){
     var user = client.user
     if(ChannelList[params.channel])
@@ -9,18 +14,20 @@ exports.ChatController = new function(){
 
   this.Subscribe = function(client, params){
     var user = client.user
-    if(ChannelList[params.channel]){
-      ChannelList[params.channel].subscribe(user)
-      user.addChannel(params.channel)
+    if(ChannelList[params.data]){
+      ChannelList[params.data].subscribe(user)
+      user.subscribe(params.data)
+      params.channel = ChannelList[params.data]
     }
     this.send(client, params)
   }
 
   this.Unsubscribe = function(client, params){
     var user = client.user
-    if(ChannelList[params.channel]){
-      ChannelList[params.channel].unsubscribe(user)
-      user.removeChannel(params.channel)
+    if(ChannelList[params.data]){
+      ChannelList[params.data].unsubscribe(user)
+      user.unsubscribe(params.data)
+      params.channel = params.data
     }
     this.send(client, params)
   }

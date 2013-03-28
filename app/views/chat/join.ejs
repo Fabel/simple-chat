@@ -1,0 +1,10 @@
+<div id="channels">
+  <ul id="join_channel_list">
+    <% channels.forEach(function(channel){ %>
+      <li>
+        <h2 class="chan_name"><%= channel %></h2>
+        <button class="button" data-emit="chat#subscribe" data-data="<%= channel %>">subscribe</button>
+      </li>
+    <% }) %>
+  </ul>
+</div>

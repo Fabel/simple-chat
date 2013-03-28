@@ -300,12 +300,15 @@ label{
 	width: 150px;
 }
 
-input.button {
+button {
+}
+
+.button {
 	margin-left: 2px;
 	border: 0;
 	color: #ffffff;
 	background: #6f2f2f;
-	padding: 9px;
+	padding: 10px;
 }
 
 input.input_text {
@@ -399,4 +402,10 @@ input.input_text {
 
 .chat_header{
 	padding: 2px 32px !important;
+}
+
+.chan_name{
+	width: 200px;
+	margin-bottom: 7px;
+	display: inline-block;
 }
