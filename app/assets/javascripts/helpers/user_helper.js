@@ -1,4 +1,5 @@
 var UserHelper = new function(){
+
   this.pushError = function(error){
     var errorsCont = content.querySelector('#errors')
     var li = document.createElement('li')
@@ -12,11 +13,11 @@ var UserHelper = new function(){
       content.innerHTML = html
       submit_registration.addEventListener('click', function(){
         if(!login.value){
-          pushError('Login missed')
+          UserHelper.pushError('Login missed')
           return
         }
         if(!password.value){
-          pushError('Password missed')
+          UserHelper.pushError('Password missed')
           return
         }
         if(password.value == password_confirmation.value){
@@ -26,7 +27,7 @@ var UserHelper = new function(){
             password_confirmation: password_confirmation.value,
           }})
         }else{
-          pushError("Password mismath")
+          UserHelper.pushError("Password mismath")
         }
       })
     })
@@ -55,11 +56,11 @@ var UserHelper = new function(){
       file_field.addEventListener('change', function(){
         file = this.files[0]
         if(!file.type.match('jpeg|jpg|png')){
-          pushError("It's not image")
+          UserHelper.pushError("It's not image")
           return
         }
         if(file.size > 2*1024*1024){
-          pushError("Image size > 2Mb")
+          UserHelper.pushError("Image size > 2Mb")
           return
         }
         previewPhoto(file)

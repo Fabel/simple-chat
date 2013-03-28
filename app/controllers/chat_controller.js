@@ -25,8 +25,16 @@ exports.ChatController = new function(){
     this.send(client, params)
   }
 
-  this.MakeChannel = function(client, params){
-    if(!ChannelList[params.channel])
-      ChannelList.newChannel(params.channel)
+  this.CreateChannel = function(client, params){
+    if(ChannelList['#'+params.name])
+      params.errors = ['Channel exist']
+    else{
+      ChannelList.newChannel('#'+params.name)
+      client.user.subscribe('#'+params.name)
+      params.success = true
+      params.channel = ChannelList['#'+params.name]
+    }
+    this.send(client, params)
   }
+
 }

@@ -15,7 +15,7 @@ var UserController = new function(){
   }
 
   this.Login = function(msg){
-      if(msg.data.success){
+    if(msg.data.success){
       localStorage.setItem('user_token', msg.data.token)
       UserHelper.success(msg.data)
       content.innerHTML = "<h2>Login successful</h2>"

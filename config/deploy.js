@@ -19,6 +19,15 @@ module.exports = function(){
   })
 
   this.task({
+    name: 'copy_assets',
+    description: 'copy assets',
+    commands: [
+      'cp -rf '+this.current+'/app/assets/images/. '+this.current+'/public/assets/',
+      'cp -rf '+this.current+'/app/views/. '+this.current+'/public/assets/'
+    ]
+  })
+
+  this.task({
     name: "stop",
     descripttion: 'stop server',
     commands: ['kill -TERM `cat '+this.current+'/tmp/server.pid`']

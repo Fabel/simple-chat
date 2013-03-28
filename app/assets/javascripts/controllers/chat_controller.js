@@ -13,6 +13,10 @@ var ChatController = new function(){
     console.log(CL.channels[msg.data])
   }
 
+  this.CreateChannel = function(msg){
+    ChatHelper.createChannel(msg)
+  }
+
   this.Message = function(msg){
     var channel
     if(channel = Cl.channels[msg.data.user.name]){

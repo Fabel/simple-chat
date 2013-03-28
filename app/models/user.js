@@ -85,12 +85,12 @@ User.loadAllUsers = function(){
 
 User.prototype = new function(){
 
-  this.addChannel = function(channel){
+  this.subscribe = function(channel){
     this.channels.push(channel)
     this.save()
   }
 
-  this.removeChannel = function(channel){
+  this.unsubscribe = function(channel){
     Utils.remove(this.channels, channel)
     this.save()
   }

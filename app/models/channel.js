@@ -27,7 +27,9 @@ Channel.prototype = new function(){
   }
 
   this.create = function(){
-    fs.writeFileSync(channelsDir+this.name, JSON.stringify({user: this.name, message: 'Channel success created'}))
+    var msg = {user: this.name, message: 'Channel success created'}
+    fs.writeFileSync(channelsDir+this.name, JSON.stringify(msg))
+    this.history.push(msg)
   }
 
   this.trimAndSave = function(){
