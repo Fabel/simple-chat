@@ -1,8 +1,23 @@
 var Application = function(){
-  var socket
+  var socket = new Socket
+  var app = this
+
+  Router.app = app
 
   this.init = function(){
-    socket = new Socket
+    ;(function(){
+      function checkSocket(){
+        if(app.checkConnection()){
+          errorInApp("Server is not available")
+          if(socket.connection.readyState)
+            socket = new Socket
+          setTimeout(checkSocket, 500)
+        }else{
+          app.run()
+        }
+      }
+      setTimeout(checkSocket, 500)
+    })()
     return this
   }
 
@@ -29,15 +44,5 @@ var Application = function(){
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-  var app = (new Application).init()
-  var checkSocket = function(){
-    Router.app = app
-    if(app.checkConnection()){
-      errorInApp("Server is not available")
-      app.init()
-    }else{
-      app.run()
-    }
-  }
-  setTimeout(checkSocket, 500)
+  ;(new Application).init()
 })

@@ -16,6 +16,7 @@ Socket.prototype = new function(){
 
     this.connection.addEventListener('close', function(){
       errorInApp("Server closed connection")
+      setTimeout(Router.app.init, 5000)
     })
   }
 
@@ -28,6 +29,6 @@ Socket.prototype = new function(){
   }
 
   this.checkConnection = function(){
-    return this.connection.readyState == 3
+    return this.connection.readyState != 1
   }
 }
