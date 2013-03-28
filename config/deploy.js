@@ -11,10 +11,10 @@ module.exports = function(){
 
   this.task({
     name: 'start',
-    descripttion: 'start server',
+    description: 'start server',
     commands: [
       "cd "+this.current,
-      "north server -e production 2>&1 >>"+this.shared+"/log/server.log &"
+      "north server -e production >> "+this.shared+"/log/server.log 2>&1 &"
     ]
   })
 
@@ -29,7 +29,7 @@ module.exports = function(){
 
   this.task({
     name: "stop",
-    descripttion: 'stop server',
+    description: 'stop server',
     commands: ['kill -TERM `cat '+this.current+'/tmp/server.pid`']
   })
 
