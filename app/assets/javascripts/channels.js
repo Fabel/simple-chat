@@ -64,6 +64,28 @@ var ChannelList = (function(){
       ChatHelper.channelSelect(this)
     }
 
+    this.notify = function(msg){
+      msg_audio.play()
+      if(window.webkitNotifications){
+        if(webkitNotifications.checkPermission()){
+          webkitNotifications.requestPermission()
+        }else{
+          var chan = this
+          var notifycation = window.webkitNotifications.createNotification(
+          msg.user.file, 'New message', msg.message.slice(0, 100)+'...');
+          notifycation.onclick = function() {
+            window.focus()
+            chan.select()
+            this.cancel()
+          };
+          notifycation.ondisplay = function() {
+            setTimeout(function(){ notifycation.cancel() }, 3000)
+          };
+          notifycation.show();
+        }
+      }
+    }
+
     this.appendMessage = function(msg){
       var self = this
       EJS.renderPartial("chat#message", {message: msg.message, user: msg.user}, function(html){
@@ -91,7 +113,7 @@ var ChannelList = (function(){
       this.last_message = user.name + ':' +message
       if(!this.current){
         this.new_messages++
-        msg_audio.play()
+        this.notify(msg)
       }
       this.appendMessage(msg)
       this.update()
