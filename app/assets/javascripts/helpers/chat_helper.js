@@ -46,6 +46,7 @@ var ChatHelper = new function(){
     channel.switchMenu()
     content.appendChild(channel.chat)
     channel.message_list.scrollTop = channel.message_list.scrollHeight
+    channel.chat.querySelector('textarea').focus()
   }
 
   this.bindEventsForChat = function(channel){
