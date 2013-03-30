@@ -63,11 +63,12 @@ var linkHandler = function(event){
     Router.local(action, data)
 }
 
-$(function(){
+var bindLinks = function(){
   document.body.addEventListener('click', function(e){
     var links = document.querySelectorAll('[data-emit], [data-local]')
     for(var i=0;i<links.length;i++){
       if(!links[i].link_handler){
+        console.log(links[i])
         links[i].addEventListener('click', linkHandler)
         links[i].link_handler = true
         var elem = e.target
@@ -83,11 +84,11 @@ $(function(){
       }
     }
   })
-})
+}
 
 $(function(){
   var token
   if(token = localStorage.getItem('user_token'))
     Router.app.emit('user#login_by_token', {token: token})
-
+  bindLinks()
 })

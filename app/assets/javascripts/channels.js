@@ -77,9 +77,12 @@ var ChannelList = (function(){
     }
 
     this.unselect = function(){
+      if(!CL.currentChannel)
+        return
       this.current = false
       CL.currentChannel = null
-      content.removeChild(this.chat)
+      if(content.querySelector('#chat'))
+        content.removeChild(this.chat)
     }
 
     this.pushMessage = function(user, message){

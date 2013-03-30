@@ -6,6 +6,7 @@ var ChatController = new function(){
 
   this.LoadChannel = function(msg){
     CL.addChannel(msg.data.channel)
+    bindLinks()
   }
 
   this.Channel = function(msg){
