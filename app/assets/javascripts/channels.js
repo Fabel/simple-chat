@@ -29,6 +29,10 @@ var ChannelList = (function(){
           ava: c.querySelector('.ava'),
           last_message: c.querySelector('.last_message')
         }
+        var ava
+        if(ava = self.messages[self.messages.length-1].user.file)
+          self.ava = ava
+        self.update()
         self.list.update()
       })
     }
@@ -66,6 +70,7 @@ var ChannelList = (function(){
         var c = div.firstChild
         self.message_list.appendChild(c)
         self.message_list.scrollTop = self.message_list.scrollHeight
+        self.ava = msg.user.file
       })
     }
 
