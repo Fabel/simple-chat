@@ -50,14 +50,18 @@ Channel.prototype = new function(){
     }
   }
   this.addMessage = function(msg){
-    var message = { user: msg.user.name, message: msg.message }
+    var clearMessage = function(msg){
+      return msg.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace(/\\u/, '\\u').replace(/\&lt;(img.+?\/)\&gt;/, "<$1>")
+    }
+    var clearedMessage = clearMessage(msg.message)
+    var message = { user: msg.user.name, message: clearedMessage }
     this.history.push(message)
     this.messageCount++
     fs.appendFileSync(channelsDir+this.name, ",\n"+JSON.stringify(message))
     if(this.messageCount>1000){
       this.save()
     }
-    return {user: msg.user, message: msg.message, channel: this.name}
+    return {user: msg.user, message: clearedMessage, channel: this.name}
   }
 
   this.historyToJSON = function(){
