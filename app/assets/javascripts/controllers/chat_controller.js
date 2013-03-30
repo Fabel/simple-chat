@@ -20,6 +20,11 @@ var ChatController = new function(){
     CL.addChannel(msg.data.channel)
   }
 
+  this.Message = function(msg){
+    if(msg.data.channel)
+      CL.channels[msg.data.channel].pushMessage(msg.data.user, msg.data.message)
+  }
+
   this.Unsubscribe = function(msg){
     if(msg.data.channel)
       CL.removeChannel(msg.data.channel)
@@ -27,14 +32,5 @@ var ChatController = new function(){
       document.body.innerHTML = data
       UserHelper.success({user: Router.app.currentUser })
     })
-  }
-
-  this.Message = function(msg){
-    var channel
-    if(channel = Cl.channels[msg.data.user.name]){
-
-    }else{
-      CL.addChannel(msg.data.user)
-    }
   }
 }

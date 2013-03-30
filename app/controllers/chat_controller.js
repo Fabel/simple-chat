@@ -5,6 +5,24 @@ exports.ChatController = new function(){
     this.send(client, params)
   }
 
+  this.broadCastForChannel = function(channel, message){
+    for(var name in channel.users)
+      this.send(channel.users[name].client, message)
+  }
+
+  this.Message = function(client, params){
+    if(client.user){
+      if(params.channel){
+        var msg = {
+          user: client.user,
+          message: params.message
+        }
+        params.message = ChannelList[params.channel].addMessage(msg)
+      }
+    }
+    this.broadCastForChannel(ChannelList[params.channel], params.message)
+  }
+
   this.LoadChannel = function(client, params){
     var user = client.user
     if(ChannelList[params.channel])

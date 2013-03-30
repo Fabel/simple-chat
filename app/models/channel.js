@@ -57,12 +57,22 @@ Channel.prototype = new function(){
     if(this.messageCount>1000){
       this.save()
     }
+    return {user: msg.user, message: msg.message, channel: this.name}
+  }
+
+  this.historyToJSON = function(){
+    return this.history.map(function(msg){
+      return {
+        message: msg.message,
+        user: Users[msg.user] || msg.user
+      }
+    })
   }
 
   this.toJSON = function(){
     return{
       name: this.name,
-      messages: this.history
+      messages: this.historyToJSON()
     }
   }
 }

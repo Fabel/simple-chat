@@ -19,7 +19,7 @@ var path = function(emitter){
   return dirNames.join('/')+'.ejs'
 }
 
-EJS.Storage.saveLocal = false
+// EJS.Storage.saveLocal = false
 
 EJS.Storage.load = function(emitter){
   var url = path(emitter)

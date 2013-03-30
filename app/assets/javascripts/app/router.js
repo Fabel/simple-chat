@@ -14,7 +14,7 @@ var Router = new function(){
   }
 
   this.processMessage = function(msg){
-    console.log(msg)
+    // console.log(msg)
     if(msg.emitter){
       this.processController(msg)
     }

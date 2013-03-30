@@ -53,9 +53,12 @@ var ChatHelper = new function(){
     var textArea = channel.chat.querySelector('textarea')
 
     submitBtn.addEventListener('click', function(){
-      channel.pushMessage(Router.app.currentUser.name, textArea.value.replace(/\n/g, '<br>'))
+      var data = {
+        channel: channel.name,
+        message: textArea.value
+      }
+      Router.app.emit('chat#message', data)
       textArea.value = ''
-      message_list.scrollTop = message_list.scrollHeight
     })
 
     textArea.addEventListener('keydown', function(e){
@@ -66,9 +69,3 @@ var ChatHelper = new function(){
     })
   }
 }
-// document.body.addEventListener('mousemove', function(e){
-//   if(e.pageY< 50)
-//     header.style.display = "block"
-//   else if(e.pageY > 200)
-//     header.style.display = "none"
-// })

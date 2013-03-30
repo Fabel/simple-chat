@@ -40,9 +40,10 @@ exports.UserController = new function(){
     var user
     if(user = User.login(params.user.login, params.user.password)){
       client.user = user
+      user.client = client
       params = {
         success: true,
-        user: user,
+        user: user.forChannels(),
         token: user.token
       }
       client.onclose(unsubscribeAll)
@@ -63,8 +64,9 @@ exports.UserController = new function(){
     if(user = User.loginByToken(params.token)){
       params = {}
       client.user = user
+      user.client = client
       params.success = true
-      params.user = user
+      params.user = user.forChannels()
       client.onclose(unsubscribeAll)
     }
     this.send(client, params)

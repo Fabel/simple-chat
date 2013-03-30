@@ -158,11 +158,18 @@ User.prototype = new function(){
     return this.token == token
   }
 
-  this.forClient = function(){
+  this.forChannels = function(){
     return {
       name: this.name,
       file: this.avatar(),
       channels: this.channels
+    }
+  }
+
+  this.forClient = function(){
+    return {
+      name: this.name,
+      file: this.avatar()
     }
   }
 

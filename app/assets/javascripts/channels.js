@@ -8,7 +8,7 @@ var ChannelList = (function(){
     this.messages = data.messages || []
     var msg
     if(msg = this.messages[this.messages.length-1])
-      this.last_message = msg.user+ ':' + msg.message
+      this.last_message = (msg.user.name || msg.user )+ ':' + msg.message
     this.container = null
     this.chat = null
     this.current = null
@@ -60,7 +60,7 @@ var ChannelList = (function(){
 
     this.appendMessage = function(msg){
       var self = this
-      EJS.renderPartial("chat#message", {message: msg}, function(html){
+      EJS.renderPartial("chat#message", {message: msg.message, user: msg.user}, function(html){
         var div = document.createElement('div')
         div.innerHTML = html
         var c = div.firstChild
@@ -78,7 +78,7 @@ var ChannelList = (function(){
     this.pushMessage = function(user, message){
       var msg = {user: user, message: message}
       this.messages.push(msg)
-      this.last_message = user + ':' +message
+      this.last_message = user.name + ':' +message
       if(!this.current)
         this.new_messages++
       this.appendMessage(msg)

@@ -444,7 +444,7 @@ input.input_text {
 
 .message{
 	padding: 5px;
-	margin-bottom: 5px;
+	margin-top: 20px;
 }
 
 .message .message_text{
