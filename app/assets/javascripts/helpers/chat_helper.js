@@ -57,9 +57,10 @@ var ChatHelper = new function(){
         channel: channel.name,
         message: textArea.value
       }
-      if(textArea.value.length)
+      if(textArea.value.length && textArea.value.length < 1024){
         Router.app.emit('chat#message', data)
-      textArea.value = ''
+        textArea.value = ''
+      }
     })
 
     textArea.addEventListener('keydown', function(e){
