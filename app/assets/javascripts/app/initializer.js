@@ -68,7 +68,6 @@ var bindLinks = function(){
     var links = document.querySelectorAll('[data-emit], [data-local]')
     for(var i=0;i<links.length;i++){
       if(!links[i].link_handler){
-        console.log(links[i])
         links[i].addEventListener('click', linkHandler)
         links[i].link_handler = true
         var elem = e.target
