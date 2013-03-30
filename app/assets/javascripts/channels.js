@@ -29,9 +29,11 @@ var ChannelList = (function(){
           ava: c.querySelector('.ava'),
           last_message: c.querySelector('.last_message')
         }
-        var ava
-        if(ava = self.messages[self.messages.length-1].user.file)
-          self.ava = ava
+        if(self.messages.length){
+          var ava
+          if(ava = self.messages[self.messages.length-1].user.file)
+            self.ava = ava
+        }
         self.update()
         self.list.update()
       })
