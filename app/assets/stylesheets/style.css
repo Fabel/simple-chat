@@ -454,6 +454,7 @@ input.input_text {
 	width: 690px;
 }
 .message .message_text pre{
+	word-wrap: break-word;
 	border: 2px solid #555;
 	min-height: 90px;
 	padding: 4px;

@@ -7,7 +7,7 @@ exports.ChatController = new function(){
 
   this.broadCastForChannel = function(channel, message){
     for(var name in channel.users)
-      this.send(channel.users[name].client, message)
+      this.send(channel.users[name].client, message, {action: 'message'})
   }
 
   this.Message = function(client, params){

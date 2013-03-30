@@ -84,8 +84,10 @@ var ChannelList = (function(){
       var msg = {user: user, message: message}
       this.messages.push(msg)
       this.last_message = user.name + ':' +message
-      if(!this.current)
+      if(!this.current){
         this.new_messages++
+        msg_audio.play()
+      }
       this.appendMessage(msg)
       this.update()
     }

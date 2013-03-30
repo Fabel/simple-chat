@@ -57,7 +57,8 @@ var ChatHelper = new function(){
         channel: channel.name,
         message: textArea.value
       }
-      Router.app.emit('chat#message', data)
+      if(textArea.value.length)
+        Router.app.emit('chat#message', data)
       textArea.value = ''
     })
 
